@@ -100,7 +100,8 @@ This endpoint is used to login a user. The request body should contain the follo
 This endpoint is used to upload an image. The request body of type form-data should contain the following fields:
 
 - image
-- description
+- description  
+  note: please do not forget to replace the image path in the postman collection with the path of the image you want to upload.
 
 ### GET /uploader/images
 
