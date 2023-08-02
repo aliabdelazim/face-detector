@@ -9,6 +9,9 @@ This is a face detector solution utilizing microservice architecture. The soluti
 - Docker
 - Kubernetes
 - RabbitMQ
+- MongoDB
+- AWS S3
+- AWS Rekognition
 
 ## How to run
 
@@ -33,7 +36,7 @@ This is a face detector solution utilizing microservice architecture. The soluti
 
 prerequisites:
 
-- configured AWS CLI credentials with access to S3
+- configured AWS CLI credentials with access to S3 and Rekognition
 - public S3 bucket with the name `now-money` in the region `ap-south-1`
 
 1. Clone the repository
