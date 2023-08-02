@@ -20,7 +20,7 @@ diagram file: `faces-detection-diagram.drawio.png`
 
 ### notes:
 
-- this solution is a separate DB for each microservice so each microservice is decoupled from the others.
+- this solution uses is a separate DB for each microservice so each microservice is decoupled from the others.
 - this solution uses RabbitMQ as a message broker to decouple the uploader microservice from the extractor microservice.
 
 ### microservices
