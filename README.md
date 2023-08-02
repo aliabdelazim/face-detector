@@ -30,7 +30,7 @@ this solution is composed of the following microservices:
 1. api-gateway: this is the entry point of the solution. it is responsible for routing the requests to the appropriate microservice.
 2. auth: this microservice is responsible for user authentication.
 3. uploader: this microservice is responsible for uploading images to S3, saving the image metadata in MongoDB and sending the image to the `IMAGES` queue in RabbitMQ.
-4. extractor: this microservice is responsible for extracting faces from images available in the `IMAGES` queue using AWS Rekognition, saving the extracted faces in MongoDB.
+4. extractor: this microservice is responsible for extracting faces from images available in the `IMAGES` queue using AWS Rekognition, saving the extracted faces in MongoDB, note that Kubernetes configuration for this microservice will replicate the pods fellowing point number 2 of the devops requirements of this assignment.
 
 ## How to run
 
@@ -50,6 +50,7 @@ this solution is composed of the following microservices:
    - /uploader
 3. run `docker-compose build` in the main directory
 4. run `kubeCtl apply -f kubernetes` in the main directory
+5. wait for about 2 minutes for the solution to be up and running before testing it
 
 ### Steps to run with docker compose
 
@@ -64,8 +65,8 @@ prerequisites:
    - /auth
    - /extractor
    - /uploader
-3. run docker compose build in the main directory
-4. run docker compose up in the main directory
+3. run `docker-compose build` in the main directory
+4. run `docker-compose up -d` in the main directory
 
 ## How to use
 
