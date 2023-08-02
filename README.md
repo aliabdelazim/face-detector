@@ -48,7 +48,7 @@ prerequisites:
 ## How to use
 
 You can use the postman collection in the main directory to test the solution.
-collection name: now-money-faces-extractor.postman_collection.json
+collection name: `now-money-faces-extractor.postman_collection.json`
 The solution exposes a REST API with the following endpoints:
 
 - POST /auth/signup
@@ -89,4 +89,4 @@ This endpoint is used to get a specific image uploaded by the user along with th
 ## Architecture
 
 The solution is based on microservice architecture. the diagram in the main directory shows the architecture of the solution.
-diagram file: faces-detection-diagram.drawio.png
+diagram file: `faces-detection-diagram.drawio.png`
