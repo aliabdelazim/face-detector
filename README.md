@@ -13,6 +13,20 @@ This is a face detector solution utilizing microservice architecture. The soluti
 - AWS S3
 - AWS Rekognition
 
+## Architecture
+
+The solution is based on microservice architecture. the diagram in the main directory shows the architecture of the solution.  
+diagram file: `faces-detection-diagram.drawio.png`
+
+### microservices
+
+this solution is composed of the following microservices:
+
+1. api-gateway: this is the entry point of the solution. it is responsible for routing the requests to the appropriate microservice.
+2. auth: this microservice is responsible for user authentication.
+3. uploader: this microservice is responsible for uploading images to S3, saving the image metadata in MongoDB and sending the image to the `IMAGES` queue in RabbitMQ.
+4. extractor: this microservice is responsible for extracting faces from images available in the `IMAGES` queue using AWS Rekognition, saving the extracted faces in MongoDB.
+
 ## How to run
 
 ### Prerequisites
@@ -89,8 +103,3 @@ This endpoint is used to get all images uploaded by the user.
 ### GET /uploader/images/:id
 
 This endpoint is used to get a specific image uploaded by the user along with the extracted faces.
-
-## Architecture
-
-The solution is based on microservice architecture. the diagram in the main directory shows the architecture of the solution.  
-diagram file: `faces-detection-diagram.drawio.png`
