@@ -61,6 +61,7 @@ The solution exposes a REST API with the following endpoints:
 
 This endpoint is used to create a new user. The request body should contain the following fields:
 
+- name
 - email
 - password
 
