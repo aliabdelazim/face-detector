@@ -1,0 +1,154 @@
+{
+	"info": {
+		"_postman_id": "d8864b27-e4d7-4426-a99b-8125d16582e6",
+		"name": "now-money-faces-extractor",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "5248397"
+	},
+	"item": [
+		{
+			"name": "Sign Up",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"ali\",\n    \"email\": \"a@a.com\",\n    \"password\": \"1234\"\n}"
+				},
+				"url": {
+					"raw": "localhost:3000/auth/signup",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"auth",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Sign In",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"a@a.com\",\n    \"password\": \"1234\"\n}"
+				},
+				"url": {
+					"raw": "localhost:3000/auth/signin",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"auth",
+						"signin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Uploaded Images Ids",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFAYS5jb20iLCJuYW1lIjoiYWxpIiwiaWF0IjoxNjkwNzMzMjc0fQ.Vc9fp7rlbZC96Rip4Ayf5ZyDhpTjkEmLT7J7jWtePIg"
+					}
+				],
+				"url": {
+					"raw": "localhost:3000/uploader/images",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"uploader",
+						"images"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Upload An Image",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFAYS5jb20iLCJuYW1lIjoiYWxpIiwiaWF0IjoxNjkwODAzNDUxfQ.05eYRgNHXHdED5gfkEC7NOdsyrsLxsTchJETzMN733g"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "image",
+							"type": "file",
+							"src": "/Users/ahoy/Downloads/image_0a9d5ab6-efe3-49d1-b59b-178ef9a862c1.jpg"
+						},
+						{
+							"key": "description",
+							"value": "me and nephew",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:3000/uploader/upload",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"uploader",
+						"upload"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Fetch Image With Extracted Faces",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFAYS5jb20iLCJuYW1lIjoiYWxpIiwiaWF0IjoxNjkwODQ2Mjk5fQ.4FR5vEdDWOJUqOqZ-J-M9V9HbGpGoyIs-HzXqw2Uwdk"
+					}
+				],
+				"url": {
+					"raw": "localhost:3000/uploader/images/64ca1698066345d848224020",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"uploader",
+						"images",
+						"64ca1698066345d848224020"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

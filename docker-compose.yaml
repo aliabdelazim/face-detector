@@ -1,0 +1,115 @@
+version: '2.4'
+
+services:
+
+  mongodb:
+    image: mongo:latest
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: uH4*Z89N8Hzy
+    ports:
+      - 27017:27017
+    volumes:
+      - mongodb_data_container:/data/db
+      - ./docker-entrypoint-initdb.d/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+    networks:
+    - face_detection
+
+  rabbitmq:
+    image: rabbitmq:3.8-management-alpine
+    container_name: 'rabbitmq'
+    ports:
+      - "5672:5672"  # AMQP port
+      - "15672:15672"  # Management plugin port for web UI
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+    networks:
+        - face_detection
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+
+
+  api-gateway:
+    build:
+      context: ./api-gateway
+      args:
+        - NODE_ENV=development
+      target: dev
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./api-gateway:/app/
+    networks:
+      - face_detection
+    env_file:
+      - ./api-gateway/.env
+    depends_on:
+      - auth
+      - extractor
+      - uploader
+
+  auth:
+    build:
+      context: ./auth
+      args:
+        - NODE_ENV=development
+      target: dev
+    ports:
+      - "3001:3001"
+    volumes:
+      - ./auth:/app/
+    networks:
+      - face_detection
+    env_file:
+      - ./auth/.env
+    depends_on:
+      - mongodb
+      - rabbitmq
+
+  extractor:
+    build:
+      context: ./extractor
+      args:
+        - NODE_ENV=development
+      target: dev
+    ports:
+      - "3002:3002"
+    volumes:
+      - ./extractor:/app/
+      - ~/.aws/credentials:/home/app/.aws/credentials:ro
+    networks:
+      - face_detection
+    command: sh -c '/bin/wait-for-it.sh rabbitmq:5672 --timeout=30 -- npm start'
+    env_file:
+      - ./extractor/.env
+    depends_on:
+      - mongodb
+      - rabbitmq
+
+  uploader:
+    build:
+      context: ./uploader
+      args:
+        - NODE_ENV=development
+      target: dev
+    ports:
+      - "3003:3003"
+    volumes:
+      - ./uploader:/app/
+      - ~/.aws/credentials:/home/app/.aws/credentials:ro
+    networks:
+      - face_detection
+    command: sh -c '/bin/wait-for-it.sh rabbitmq:5672 --timeout=30 -- npm start'
+    env_file:
+      - ./uploader/.env
+    depends_on:
+      - mongodb
+      - rabbitmq
+
+volumes:
+  mongodb_data_container:
+  rabbitmq_data:
+networks:
+  face_detection:
+    driver: bridge

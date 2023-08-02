@@ -1,0 +1,35 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mongo-initdb
+
+data:
+  mongo-init.js: |
+    print('Start creating database ##########################')
+    db = db.getSiblingDB('auth');
+    db.createUser(
+        {
+            user: 'user1',
+            pwd:  'uH4*Z89N8Hzy',
+            roles: [{role: 'readWrite', db: 'auth'}],
+        }
+    );
+
+    db = db.getSiblingDB('faces');
+    db.createUser(
+        {
+            user: 'user2',
+            pwd:  'uH4*Z89N8Hzy',
+            roles: [{role: 'readWrite', db: 'faces'}],
+        }
+    );
+
+    db = db.getSiblingDB('images');
+    db.createUser(
+        {
+            user: 'user3',
+            pwd:  'uH4*Z89N8Hzy',
+            roles: [{role: 'readWrite', db: 'images'}],
+        }
+    );
+    print('End creating database ##########################')

@@ -1,0 +1,49 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongodb
+spec:
+  selector:
+    app: mongodb
+  type: ClusterIP
+  ports:
+    - protocol: TCP
+      port: 27017
+      targetPort: 27017
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongodb-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mongodb
+  template:
+    metadata:
+      labels:
+        app: mongodb
+    spec:
+      containers:
+        - name: mongodb
+          image: mongo:latest
+          volumeMounts:
+            - name: mongo-initdb
+              mountPath: /docker-entrypoint-initdb.d
+          env:
+            - name: MONGO_INITDB_ROOT_USERNAME
+              value: root
+            - name: MONGO_INITDB_ROOT_PASSWORD
+              value: uH4*Z89N8Hzy
+          resources:
+            limits:
+              cpu: 100m
+              memory: 2000Mi
+            requests:
+              cpu: 100m
+              memory: 100Mi
+      volumes:
+        - name: mongo-initdb
+          configMap:
+            name: mongo-initdb

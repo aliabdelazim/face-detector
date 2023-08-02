@@ -1,0 +1,22 @@
+
+# System Files
+.DS_Store
+Thumbs.db
+
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# compiled output
+dist
+tmp
+/out-tsc
+
+# dependencies
+api-gateway/node_modules
+auth/node_modules
+extractor/node_modules
+uploader/node_modules
